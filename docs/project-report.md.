@@ -1,0 +1,97 @@
+# CloudLink — AWS VPC Peering Project Report
+
+## 1. Abstract
+
+CloudLink is a networking project that demonstrates the configuration of VPC Peering between two Amazon Virtual Private Clouds (VPCs) using the AWS Management Console.
+
+The project covers VPC creation, subnet configuration, route tables, a peering connection, and security groups. The configuration is documented with screenshots.
+
+## 2. Problem Statement
+
+Separate VPCs are isolated networks by default. VPC Peering provides a private network connection between two VPCs, provided that routes and network security rules are configured correctly.
+
+## 3. Objectives
+
+- Create two VPCs with non-overlapping IPv4 CIDR blocks.
+- Create a subnet in each VPC.
+- Establish a VPC Peering connection.
+- Configure reciprocal routes through the peering connection.
+- Create security groups for both VPCs.
+- Document the configuration and its verification.
+
+## 4. Tools and Technologies
+
+- Amazon Web Services (AWS)
+- Amazon VPC
+- AWS Management Console
+- VPC route tables
+- VPC security groups
+- GitHub
+- diagrams.net
+
+## 5. Network Configuration
+
+| Resource | Name | CIDR |
+|---|---|---|
+| VPC A | CloudLink-VPC-A | 10.0.0.0/16 |
+| Subnet A | CloudLink-Subnet-A | 10.0.1.0/24 |
+| VPC B | CloudLink-VPC-B | 10.1.0.0/16 |
+| Subnet B | CloudLink-Subnet-B | 10.1.1.0/24 |
+
+The AWS Region selected for this project is Asia Pacific (Sydney), ap-southeast-2.
+
+## 6. Implementation
+
+### Step 1: VPC Creation
+
+Two VPCs were created with separate IPv4 CIDR blocks.
+
+### Step 2: Subnet Creation
+
+One subnet was created in each VPC using a subnet CIDR within its parent VPC's address range.
+
+### Step 3: VPC Peering
+
+A peering connection named CloudLink-Peering was created between the two VPCs. Its status was reported as Active.
+
+### Step 4: Route Table Configuration
+
+CloudLink-RT-A was configured with a route to 10.1.0.0/16 through the peering connection.
+
+CloudLink-RT-B was configured with a route to 10.0.0.0/16 through the peering connection.
+
+The local routes were retained.
+
+### Step 5: Security Groups
+
+CloudLink-SG-A and CloudLink-SG-B were created in their respective VPCs. Inbound rules were left empty because no test endpoints have been configured.
+
+## 7. Results and Verification
+
+The project configuration was reported to contain an active peering connection and reciprocal routes in both route tables.
+
+These results demonstrate the reported network configuration. They do not establish successful end-to-end application connectivity.
+
+## 8. Testing Limitations
+
+No live endpoint-to-endpoint connectivity test has been documented.
+
+A future test can use suitable endpoints with narrowly scoped security rules, or an appropriate AWS network analysis tool. Any additional resources should be reviewed for cost before use.
+
+## 9. Cost Considerations
+
+The implementation was designed to avoid unnecessary compute resources. The VPC, subnet, route table, and security group configuration does not itself require launching EC2 instances.
+
+Applicable AWS service pricing should be reviewed before adding further resources.
+
+## 10. Conclusion
+
+CloudLink demonstrates the foundational configuration of VPC Peering using the AWS Management Console. The project documents two VPCs, their subnets, reciprocal routes, and security groups.
+
+The next stage is to preserve configuration evidence and, if feasible, validate network reachability without incurring unnecessary costs.
+
+## 11. References
+
+- AWS VPC Peering Guide: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
+- AWS Route Tables: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
+- AWS Reachability Analyzer: https://docs.aws.amazon.com/vpc/latest/reachability/what-is-reachability.html
